@@ -40,23 +40,51 @@
 
     ];
 ?>
-<ul>
-    <?php foreach($hotels as $hotel) { ?>
-        <li>
-            <h2> <?php echo $hotel["name"]; ?> </h2>
-            <p> <?php echo $hotel["description"]; ?> </p>
-            <span> 
-                <?php 
-                if($hotel["parking"] == 1 ){
-                    echo "True";
-                }else{
-                    echo "False";
-                }
-                ?>
-            </span>
-            <span> <?php echo $hotel["vote"]; ?> </span>
-            <span> <?php echo $hotel["distance_to_center"]; ?> </span>
-        </li>
-    <?php } ?>
-</ul>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Parking</th>
+            <th scope="col">Vote</th>
+            <th scope="col">Distance to center</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($hotels as $key => $hotel) { ?>
+            <tr>
+                <th scope="row"> <?php echo $key ?> </th>
+                <td> <?php echo $hotel["name"]; ?> </td>
+                <td> <?php echo $hotel["description"]; ?> </td>
+                <td> 
+                    <?php 
+                        if($hotel["parking"] == 1 ){
+                            echo "True";
+                        }else{
+                            echo "False";
+                        }
+                    ?>
+                </td>
+                <td> <?php echo $hotel["vote"]; ?> </td>
+                <td> <?php echo $hotel["distance_to_center"]; ?> </td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
+</body>
+
+
+
+
+    
