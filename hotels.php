@@ -40,4 +40,23 @@
 
     ];
 ?>
+<ul>
+    <?php foreach($hotels as $hotel) { ?>
+        <li>
+            <h2> <?php echo $hotel["name"]; ?> </h2>
+            <p> <?php echo $hotel["description"]; ?> </p>
+            <span> 
+                <?php 
+                if($hotel["parking"] == 1 ){
+                    echo "True";
+                }else{
+                    echo "False";
+                }
+                ?>
+            </span>
+            <span> <?php echo $hotel["vote"]; ?> </span>
+            <span> <?php echo $hotel["distance_to_center"]; ?> </span>
+        </li>
+    <?php } ?>
+</ul>
 
