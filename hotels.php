@@ -39,6 +39,32 @@
         ],
 
     ];
+
+    session_start();
+
+
+    if( !empty($_GET['parking']) && ($_GET['parking']==='on')){
+        $hotelWithPark=[];
+        foreach ($hotels as $hotel) {
+            if($hotel['parking'] === true){
+                $hotelWithPark[] = $hotel;
+            }
+        }
+        $hotels = $hotelWithPark;
+        //var_dump($hotels);
+    }
+
+    if( !empty($_GET['vote']) && ($_GET['vote']<=5) && ($_GET['vote']>0)){
+        $_SESSION['vote'] = $_GET['vote'];
+
+        $newHotelList=[];
+        foreach ($hotels as $hotel) {
+            if($hotel['vote']>= (string)$_GET['vote']){
+                $newHotelList[]=$hotel;
+            }
+        }
+        $hotels= $newHotelList;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -53,16 +79,17 @@
     <form action="./hotels.php" methods="get">
         <div class="check">
             <label for="parking">hotel with parking</label>
-            <input type="checkbox" name="parking" id="parking" class="">
+            <input type="checkbox" name="parking" id="parking" <?php if(!empty($_GET['parking'])) echo "checked"; ?> >
         </div>
         <div class="check">
             <label for="vote"> higher vote than </label>
-            <input type="number" name="vote" id="vote">
+            <input type="number" name="vote" id="vote" value=" <?php if(!empty($_GET['vote'])) echo $_SESSION['vote'] ?> ">
         </div>
         <button type="submit">
             Filter
         </button>
     </form>
+    
     <table class="table table-striped">
         <thead>
             <tr>
